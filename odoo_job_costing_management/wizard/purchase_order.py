@@ -37,7 +37,7 @@ class PurchaseOrderWizard(models.TransientModel):
         rec.update({'product_line_ids': vals})
         return rec
     
-    # @api.multi
+    @api.multi
     def _prepare_purchase_order(self, vendor):
         self.ensure_one()
         stock_pick_obj = self.env['stock.picking'].browse(self._context.get('active_ids', []))
@@ -58,7 +58,7 @@ class PurchaseOrderWizard(models.TransientModel):
         }
         return purchase_req_vals
     
-    # @api.multi
+    @api.multi
     def create_purchase_requistion(self):
         picking = self.env['stock.picking'].browse(self._context.get('active_ids', []))
         purchase_obj = self.env['purchase.order']

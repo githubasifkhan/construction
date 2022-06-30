@@ -19,7 +19,7 @@ class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
     
     
-    # @api.multi
+    @api.multi
     def button_confirm_UNUSED(self):
         result = super(PurchaseOrder,self).button_confirm()
         cost_line_obj = self.env['job.cost.line']

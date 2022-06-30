@@ -36,7 +36,7 @@ class ProjectProject(models.Model):
         for project in self:
             project.notes_count = len(project.notes_ids)
     
-    # @api.multi
+    @api.multi
     def view_notes(self):
         for rec in self:
             res = self.env.ref('odoo_job_costing_management.action_project_note_note')

@@ -1,5 +1,4 @@
 <odoo>
-
     <data>
     
     <record id="material_purchase_requisition_form_view_inherit_materials" model="ir.ui.view">

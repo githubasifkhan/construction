@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<header t-name="Menu">
+	    <nav class="o_main_navbar">
+	        <ul class="o_menu_apps" />
+	        <a class="o_menu_brand" role="button" />
+	        <ul class="o_menu_sections" role="menu" />
+	        <ul class="o_menu_systray" role="menu" />
+	    </nav>
+	</header>
+	<t t-extend="AppsMenu">
+		<t t-jquery="li.dropdown" t-operation="replace">
+			<li class="dropdown">
+				<a class="full" data-toggle="dropdown" href="#">
+					<i class="fa fa-th" />
+				</a>
+				<div class="dropdown-menu o_application_switcher" role="menu">
+					<div class="container o_application_switcher_scrollable">
+						<h3 t-esc="widget.getLogo().name" style="font-size: 28px;padding-top: 25px;color: #fff;" />
+						<div class="o_apps">
+							<t t-foreach="widget.getApps()" t-as="app">
+		            			<a role="menuitem" class="o_app o_menuitem" t-att-data-menu-id="app.menuID" t-att-data-menu-xmlid="app.xmlID" t-att-data-action-id="app.actionID">
+		                			<img t-attf-src="/web/image/ir.ui.menu/{{ app.menuID }}/web_icon_data" t-att-alt="app.name" class="o_app_icon" t-att-title="app.name" />
+		            				<div class="o_caption"> <t t-esc="app.name" /></div>
+		            			</a>
+		            		</t>
+						</div>
+		       		</div>
+		       		<p class="text-center" style="width: 100%;"><a href="#" class="mt16" style="font-size: 14px;font-weight: 700;padding-top: 10px;color: #fff;">Powered By AAW</a></p>
+        		</div>
+			</li>
+		</t>
+	</t>
+	
+	<t t-name="DashboardApps">
+	    <div class="text-center o_web_settings_dashboard_apps">
+	        <i class="fa fa-cog fa-4x text-muted o_browse_apps" style="cursor: pointer;" role="img" aria-label="Browse Apps" title="Browse Apps" />
+	        <div class="o_web_settings_dashboard_header">
+	            <t t-set="installed_apps" t-value="widget.data.installed_apps" />
+	            <t t-if="installed_apps">
+	                <t t-esc="installed_apps" />
+	                <t t-if="installed_apps == 1">Installed App</t>
+	                <t t-if="installed_apps &gt; 1">Installed Apps</t>
+	            </t>
+	            <t t-if="! installed_apps">
+	                No app installed
+	            </t>
+	        </div>
+	        <div>
+	            <a href="#" class="btn btn-primary btn-block o_browse_apps" role="button"><strong>Browse Apps</strong></a>
+	        </div>
+	        <div class="clearfix" />
+	    </div>
+	</t>
+<!-- Antash Code -->
+	<t t-extend="UserMenu">
+		<t t-jquery="li.o_user_menu" t-operation="before">
+			<li class="o_side_menu">
+				<a role="button" data-work="full" class="side_menu d-none" data-display="static" aria-expanded="false">
+					<i class="fa fa-long-arrow-right"/>
+				</a>
+				<a role="button" data-work="half" class="side_menu d-none" data-display="static" aria-expanded="false">
+					<i class="fa fa-long-arrow-left"/>
+				</a>
+				<a role="button" data-work="none" class="side_menu d-none" data-display="static" aria-expanded="false">
+					<i class="fa fa-arrows-h"/>
+				</a>
+			</li>
+		</t>
+	</t>
+<!-- Suraj & Jay Code -->
+	<t t-extend="UserMenu.Actions">
+		<t t-jquery="a[data-menu='account']" t-operation="replace">
+			<a role="menuitem" href="/web-discuss-post" class="dropdown-item">Voffice Intranet</a>
+		</t>
+		<t t-jquery="a[data-menu='documentation']" t-operation="replace">
+			<a role="menuitem" href="#" data-menu="documentation" style="display:none;" class="dropdown-item">Documentation</a>
+		</t>
+		<t t-jquery="a[data-menu='support']" t-operation="replace">
+			<a role="menuitem" href="#" data-menu="support" style="display:none;" class="dropdown-item">Support</a>
+		</t>
+	</t>
+</templates>

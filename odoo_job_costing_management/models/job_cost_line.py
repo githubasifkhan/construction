@@ -37,11 +37,11 @@ class JobCostLine(models.Model):
             rec.actual_hour = sum([p.unit_amount for p in rec.timesheet_line_ids])
     
     #@api.depends('account_invoice_line_ids','account_invoice_line_ids.quantity')
-    # @api.depends('account_invoice_line_ids','account_invoice_line_ids.quantity', 'account_invoice_line_ids.invoice_id.state')
-    # def _compute_actual_invoice_quantity(self):
-    #     for rec in self:
+    @api.depends('account_invoice_line_ids','account_invoice_line_ids.quantity', 'account_invoice_line_ids.invoice_id.state')
+    def _compute_actual_invoice_quantity(self):
+        for rec in self:
             #rec.actual_invoice_quantity = sum([p.quantity for p in rec.account_invoice_line_ids])
-            # rec.actual_invoice_quantity = sum([p.invoice_id.state in ['open', 'paid'] and p.quantity or 0.0 for p in rec.account_invoice_line_ids])
+            rec.actual_invoice_quantity = sum([p.invoice_id.state in ['open', 'paid'] and p.quantity or 0.0 for p in rec.account_invoice_line_ids])
     
     direct_id = fields.Many2one(
         'job.costing',
@@ -120,7 +120,7 @@ class JobCostLine(models.Model):
         'job_cost_line_id',
     )
     account_invoice_line_ids = fields.One2many(
-        'account.move.line',
+        'account.invoice.line',
         'job_cost_line_id',
     )
     actual_quantity = fields.Float(

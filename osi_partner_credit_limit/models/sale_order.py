@@ -24,7 +24,7 @@ class SaleOrder(models.Model):
     '''
 
 
-    # @api.multi
+    @api.multi
     def action_confirm(self):
         state = self.partner_id.check_limit(self)
         if self.sales_hold and not self.credit_override:

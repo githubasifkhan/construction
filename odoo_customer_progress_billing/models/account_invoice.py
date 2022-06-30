@@ -3,15 +3,15 @@
 from odoo import models, fields, api, _
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.move'
+    _inherit = 'account.invoice'
     
-    # @api.multi
+    @api.multi
     @api.depends('project_id')
     def _set_total_progress_bill(self):
         for rec in self:
             rec.total_progress_billing = rec.project_id.total_progress_account
             
-    # @api.multi
+    @api.multi
     @api.depends('amount_total')
     def _set_invoiceto_date(self):
         for rec in self:
@@ -20,15 +20,15 @@ class AccountInvoice(models.Model):
             for inv in cus_inv:
                 rec.invoice_to_date += inv.amount_total
 
-    # @api.multi
+    @api.multi
     @api.depends('total_progress_billing', 'invoice_to_date')
     def _set_remaining_progress_billing(self):
         for rec in self:
             # rec.remaining_progress_billing = rec.total_progress_billing - rec.invoice_to_date
             rec.remaining_progress_billing = rec.total_progress_billing - rec.previously_invoice
 
-    # @api.multi
-    @api.depends('amount_total','amount_residual')
+    @api.multi
+    @api.depends('amount_total','residual')
     def _set_previously_invoiced(self):
         for rec in self:
             pre_inv = self.search([('state', 'in', ['open', 'paid']), ('partner_id', '=', rec.partner_id.id), ('project_id', '=', rec.project_id.id)])
@@ -40,24 +40,24 @@ class AccountInvoice(models.Model):
                 for pre in pre_inv:
                     if pre.id != rec.id:
                         rec.previously_invoice += pre.amount_total
-                        rec.previously_invoice_due += pre.amount_residual
-                        print ("amount_residual:-------------------",pre.amount_residual)
+                        rec.previously_invoice_due += pre.residual
+                        print ("residual:-------------------",pre.residual)
                 #rec.previously_invoice = rec.previously_invoice - rec.amount_total
-                #rec.previously_invoice_due = rec.previously_invoice_due - rec.amount_residual
+                #rec.previously_invoice_due = rec.previously_invoice_due - rec.residual
     
-    # @api.multi
+    @api.multi
     @api.depends('amount_total')
     def _set_current_invoiced(self):
         for rec in self:
             rec.current_invoice = rec.amount_total
             
-    # @api.multi
-    @api.depends('amount_residual')
+    @api.multi
+    @api.depends('residual')
     def _set_less_paid_amount(self):
         for rec in self:
-            rec.less_paid_amount = rec.amount_residual
+            rec.less_paid_amount = rec.residual
             
-    # @api.multi
+    @api.multi
     @api.depends('less_paid_amount','previously_invoice','current_invoice')
     def _set_total_due(self):
         for rec in self:

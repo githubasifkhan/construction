@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <odoo>
     
     <!-- New Construction Proejct Notes Kanban View -->
@@ -129,7 +128,7 @@
     <record id="action_project_note_note" model="ir.actions.act_window">
       <field name="name">Notes</field>
       <field name="res_model">note.note</field>
-<!--      <field name="view_type">form</field>-->
+      <field name="view_type">form</field>
       <field name="view_mode">kanban,tree,form</field>
       <field name="search_view_id" ref="view_project_note_note_filter"/>
       <field name="context">{'default_is_project': True}</field>
@@ -161,7 +160,7 @@
     <record id="action_task_note_note" model="ir.actions.act_window">
       <field name="name">Notes</field>
       <field name="res_model">note.note</field>
-<!--      <field name="view_type">form</field>-->
+      <field name="view_type">form</field>
       <field name="view_mode">kanban,tree,form</field>
       <field name="search_view_id" ref="view_project_note_note_filter"/>
       <field name="context">{'default_is_task': True}</field>

@@ -12,7 +12,7 @@ class ProjectUserSubtask(models.TransientModel):
         required=True,
     )
     
-    # @api.multi
+    @api.multi
     def create_subtask(self):
         task_id = self._context.get('active_id', False)
         task = self.env['project.task'].browse(task_id)

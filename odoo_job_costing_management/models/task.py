@@ -68,7 +68,7 @@ class ConsumedMaterial(models.Model):
 class ProjectTask(models.Model):
     _inherit = 'project.task'
     
-    # @api.multi
+    @api.multi
     @api.depends('picking_ids.requisition_line_ids')
     def _compute_stock_picking_moves(self):
         for rec in self:
@@ -141,7 +141,7 @@ class ProjectTask(models.Model):
         })
         return super(ProjectTask, self).create(vals) 
     
-    # @api.multi
+    @api.multi
     def view_stock_moves(self):
         for rec in self:
             stock_move_list = []
@@ -154,7 +154,7 @@ class ProjectTask(models.Model):
         result['domain'] = str([('id', 'in', stock_move_list)])
         return result
         
-    # @api.multi
+    @api.multi
     def view_notes(self):
         for rec in self:
             res = self.env.ref('odoo_job_costing_management.action_task_note_note')

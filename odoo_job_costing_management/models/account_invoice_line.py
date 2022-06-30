@@ -3,7 +3,7 @@
 from odoo import models, fields
 
 class AccountInvoiceLine(models.Model):
-    _inherit = 'account.move.line'
+    _inherit = 'account.invoice.line'
     
     job_cost_id = fields.Many2one(
         'job.costing',
@@ -16,7 +16,7 @@ class AccountInvoiceLine(models.Model):
     
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.move'
+    _inherit = 'account.invoice'
 
     def _prepare_invoice_line_from_po_line(self, line):
         data = super(

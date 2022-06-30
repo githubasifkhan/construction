@@ -1,5 +1,4 @@
 <odoo>
-
     <data>
     
         <record id="purchase_order_form_inherit_picking" model="ir.ui.view">
@@ -14,5 +13,4 @@
         </record>
     
     </data>
-
 </odoo>

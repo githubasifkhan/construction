@@ -1,5 +1,4 @@
 <odoo>
-
     <data>
     
     <record id="view_task_form2_inherit_picking" model="ir.ui.view">
@@ -41,11 +40,11 @@
 <!--                        <field name="stock_moves_count" widget="statinfo" options="{'label_field': 'label_notes'}"/-->
                     </button>
             </xpath>
-<!--            <field name="user_id" position="after">-->
-<!--                <field name="date_start"/>-->
-<!--                <field name="date_end"/>-->
-<!--                <field name="job_number"/>-->
-<!--            </field>-->
+            <field name="user_id" position="after">
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="job_number"/>
+            </field>
             <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
                  <button class="oe_stat_button" type="object" icon="fa-tasks" name="view_notes">
                         <field string="Notes" name="notes_count" widget="statinfo" options="{'label_field': 'label_notes'}"/>

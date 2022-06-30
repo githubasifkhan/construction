@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+		<template id="assets_backend" name="Enterprise Backend Theme" inherit_id="web.assets_backend">
+			<xpath expr=".">
+				<link rel="stylesheet" href="/enterprise_backend_theme/static/src/scss/style.scss"/>
+				<link rel="stylesheet" href="/enterprise_backend_theme/static/src/css/backend_style.css"/>
+				<script type="text/javascript" src="/enterprise_backend_theme/static/src/js/menu.js"></script>
+				<script type="text/javascript" src="/enterprise_backend_theme/static/src/js/usermenu.js"></script>
+			</xpath>
+		</template>
+		
+		
+</odoo>

@@ -7,14 +7,14 @@ from odoo.exceptions import Warning, UserError
 class PurchaseRequisition(models.Model):
     _inherit = 'material.purchase.requisition'
     
-    # @api.multi
+    @api.multi
     @api.onchange('task_id')
     def onchange_project_task(self):
         for rec in self:
             rec.project_id = rec.task_id.project_id.id
             rec.analytic_account_id = rec.task_id.project_id.analytic_account_id.id
     
-    # @api.multi
+    @api.multi
     @api.depends('requisition_line_ids',
                  'requisition_line_ids.product_id',
                  'requisition_line_ids.product_id.boq_type')

@@ -20,7 +20,7 @@ class JobCosting(models.Model):
         })
         return super(JobCosting, self).create(vals) 
     
-    # @api.multi
+    @api.multi
     def unlink(self):
         for rec in self:
             if rec.state not in ('draft', 'cancel'):
@@ -63,21 +63,21 @@ class JobCosting(models.Model):
         for rec in self:
             rec.jobcost_total = rec.material_total + rec.labor_total + rec.overhead_total
                 
-    # @api.multi
+    @api.multi
     def _purchase_order_line_count(self):
         purchase_order_lines_obj = self.env['purchase.order.line']
         for order_line in self:
             order_line.purchase_order_line_count = purchase_order_lines_obj.search_count([('job_cost_id','=',order_line.id)])
             
-    # @api.multi
+    @api.multi
     def _timesheet_line_count(self):
         hr_timesheet_obj = self.env['account.analytic.line']
         for timesheet_line in self:
             timesheet_line.timesheet_line_count = hr_timesheet_obj.search_count([('job_cost_id', '=', timesheet_line.id)])
     
-    # @api.multi
+    @api.multi
     def _account_invoice_line_count(self):
-        account_invoice_lines_obj = self.env['account.move.line']
+        account_invoice_lines_obj = self.env['account.invoice.line']
         for invoice_line in self:
             invoice_line.account_invoice_line_count = account_invoice_lines_obj.search_count([('job_cost_id', '=', invoice_line.id)])
             
@@ -237,32 +237,32 @@ class JobCosting(models.Model):
     )
     
     account_invoice_line_ids = fields.One2many(
-        "account.move.line",
+        "account.invoice.line",
         'job_cost_id',
     )
     
-    # @api.multi
+    @api.multi
     def action_draft(self):
         for rec in self:
             rec.write({
                 'state' : 'draft',
             })
     
-    # @api.multi
+    @api.multi
     def action_confirm(self):
         for rec in self:
             rec.write({
                 'state' : 'confirm',
             })
         
-    # @api.multi
+    @api.multi
     def action_approve(self):
         for rec in self:
             rec.write({
                 'state' : 'approve',
             })
     
-    # @api.multi
+    @api.multi
     def action_done(self):
         for rec in self:
             rec.write({
@@ -270,13 +270,13 @@ class JobCosting(models.Model):
                 'complete_date':date.today(),
             })
         
-    # @api.multi
+    @api.multi
     def action_cancel(self):
         for rec in self:
             rec.write({
                 'state' : 'cancel',
             })
-    # @api.multi
+    @api.multi
     def action_view_purchase_order_line(self):
         self.ensure_one()
         purchase_order_lines_obj = self.env['purchase.order.line']
@@ -293,7 +293,7 @@ class JobCosting(models.Model):
         }
         return action
         
-    # @api.multi
+    @api.multi
     def action_view_hr_timesheet_line(self):
         hr_timesheet = self.env['account.analytic.line']
         cost_ids = hr_timesheet.search([('job_cost_id','=',self.id)]).ids
@@ -301,14 +301,14 @@ class JobCosting(models.Model):
         action['domain'] = [('id', 'in', cost_ids)]
         return action
         
-    # @api.multi
+    @api.multi
     def action_view_vendor_bill_line(self):
-        account_invoice_lines_obj = self.env['account.move.line']
+        account_invoice_lines_obj = self.env['account.invoice.line']
         cost_ids = account_invoice_lines_obj.search([('job_cost_id','=',self.id)]).ids
         action = {
             'type': 'ir.actions.act_window',
             'name': 'Account Invoice Line',
-            'res_model': 'account.move.line',
+            'res_model': 'account.invoice.line',
             'res_id': self.id,
             'domain': "[('id','in',[" + ','.join(map(str, cost_ids)) + "])]",
             'view_type': 'form',

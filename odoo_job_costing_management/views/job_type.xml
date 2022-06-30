@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <odoo>
     <data>
     
@@ -38,7 +37,7 @@
     <record model="ir.actions.act_window" id="action_job_type">
         <field name="name">Job Type</field>
         <field name="res_model">job.type</field>
-<!--        <field name="view_type">form</field>-->
+        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
     

@@ -5,7 +5,7 @@ from odoo import fields, models, api
 class Project(models.Model):
     _inherit = "project.project"
     
-    # @api.multi
+    @api.multi
     def _compute_jobcost_count(self):
         jobcost = self.env['job.costing']
         job_cost_ids = self.mapped('job_cost_ids')
@@ -22,7 +22,7 @@ class Project(models.Model):
         'project_id',
     )
     
-    # @api.multi
+    @api.multi
     def project_to_jobcost_action(self):
         job_cost = self.mapped('job_cost_ids')
         action = self.env.ref('odoo_job_costing_management.action_job_costing').read()[0]
@@ -34,7 +34,7 @@ class Project(models.Model):
 class ProjectTask(models.Model):
     _inherit = 'project.task'
     
-    # @api.multi
+    @api.multi
     def _compute_jobcost_count(self):
         jobcost = self.env['job.costing']
         job_cost_ids = self.mapped('job_cost_ids')
@@ -51,7 +51,7 @@ class ProjectTask(models.Model):
         'task_id',
     )
     
-    # @api.multi
+    @api.multi
     def task_to_jobcost_action(self):
         job_cost = self.mapped('job_cost_ids')
         action = self.env.ref('odoo_job_costing_management.action_job_costing').read()[0]

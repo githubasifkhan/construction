@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    # @api.multi
+    @api.multi
     def _get_allow_transfer(self):
         result = False
         for record in self:
@@ -39,7 +39,7 @@ class StockPicking(models.Model):
         compute='_get_allow_transfer'
     )
 
-    # @api.multi
+    @api.multi
     def button_validate(self):
         # Only outgoing picking
         if self.picking_type_code == 'outgoing':

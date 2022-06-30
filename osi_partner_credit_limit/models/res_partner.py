@@ -24,7 +24,7 @@ class Partner(models.Model):
     )
 
    
-    # @api.multi
+    @api.multi
     def write(self, vals):
 
         res = super(Partner,self).write(vals)
@@ -39,7 +39,7 @@ class Partner(models.Model):
         return res
     
 
-    # @api.multi
+    @api.multi
     def check_limit(self, sale_id):
         partner_id = sale_id.partner_id
         # Other orders for this partner
@@ -50,7 +50,7 @@ class Partner(models.Model):
         ])
         # Open invoices (unpaid or partially paid invoices --
         # It is already included in partner.credit
-        invoice_ids = self.env['account.move'].search([
+        invoice_ids = self.env['account.invoice'].search([
             ('partner_id', '=', partner_id.id),
             #('state', '=', 'open'),
             ('state', 'in', ['open', 'draft']),

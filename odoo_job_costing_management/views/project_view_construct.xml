@@ -1,5 +1,4 @@
 <odoo>
-
     <data>
     
     <record id="edit_project_inherit_construction" model="ir.ui.view">
@@ -57,7 +56,7 @@
         <field name="inherit_id" ref="project.view_task_form2"/>
         <field name="arch" type="xml">
             <xpath expr="//form/header/field[@name='stage_id']" position="before">
-                 <button string="Create Subtasks" type="action" name="%(action_project_subtask_user_wizard)d"
+                 <button string="Create Subtasks" type="action" name="%(action_proejct_subtask_user_wizard)d"
                          class="oe_highlight" groups="project.group_project_manager" />
              </xpath>
              <xpath expr="//form/sheet/notebook/page[2]" position="after">

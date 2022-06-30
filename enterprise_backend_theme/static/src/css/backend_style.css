@@ -1,0 +1,66 @@
+.o_mail_systray_item .o_notification_counter {
+    background: cornflowerblue;
+}
+a {
+	color: cornflowerblue;
+}
+a:hover {
+	color: #555487;
+}
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle{
+	border-color:cornflowerblue !important;
+	color: cornflowerblue !important;
+}
+.o_enterprise_label {
+	display: none !important;
+}
+.custom-checkbox
+.custom-control-input:checked ~ .custom-control-label::after{
+	background-color:cornflowerblue !important;
+}
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after{
+	background-color:transparent !important; 
+}
+.o_list_view .text-info {
+	color: cornflowerblue !important;
+}
+
+
+.o_side_menu img {
+	height: 26px;
+    transform: translateY(-2px);
+}
+.o_side_menu a {
+	cursor: pointer;
+}
+
+/* Heri Bro */
+
+.modal-header{
+	background-color: #4F5A67;
+    color: #fff;
+    border-radius: 0px;
+}
+.modal-header .close{
+    color: #fff;
+    opacity: 1 !important;
+}
+
+
+
+/* New Theme Improvement in Voffice */
+
+div > .o_kanban_project_tasks > .o_kanban_group > .oe_kanban_color_11{
+	background: red !important;
+	color: #fff !important;
+}
+div > .o_kanban_project_tasks > .o_kanban_group > .oe_kanban_color_4{
+	background: #5f5e97 !important;
+	color: #fff !important;
+}
+div > .o_kanban_project_tasks > .o_kanban_group > .oe_kanban_color_8{
+	background: #ffc107 !important;
+	color: #000 !important;
+}
